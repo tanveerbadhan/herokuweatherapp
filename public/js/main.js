@@ -1,3 +1,4 @@
+
 const cityName = document.getElementById('cityName');
 const submitBtn = document.getElementById('submitBtn');
 const city_name = document.getElementById('city_name');
@@ -15,7 +16,7 @@ const getInfo = async(event)=>{
     {
       city_name.innerText = `Enter a city name first`;
       datahide.classList.add('data_hide');
-      city_name.classList.remove('data_hide');
+     
     }
     else{
         try{
@@ -24,6 +25,7 @@ const getInfo = async(event)=>{
             const data = await response.json();
             const arrData = [data];
 
+            city_name.innerText = `${arrData[0].name}, ${arrData[0].sys.country}`;
             temp_real_val.innerText = arrData[0].main.temp;
             const tempMood = arrData[0].weather[0].main;
 
@@ -41,18 +43,19 @@ const getInfo = async(event)=>{
                 temp_status.innerHTML = "<i class='fas fa-sun' style=color:#eccc68;'></i>";
             }
             datahide.classList.remove('data_hide');
-            city_name.classList.add('data_hide');
+            
 
         }catch{
             city_name.innerText = `Enter a valid city name`;
             datahide.classList.add('data_hide');
-            city_name.classList.remove('data_hide');
+            
         }
+
+        
         
     }
 
 }
-
 submitBtn.addEventListener('click', getInfo);
 
 const getcurrentdate = ()=>{
